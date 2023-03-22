@@ -1,41 +1,26 @@
-
-import { useState } from 'react';
-import './App.css';
-import BoxDerIzq from './Components/BoxDerIzq';
-import BoxIzqDer from './Components/boxIzqDer';
-import BoxUpDown from './Components/BoxUpDown';
-import Semaphor from './Components/Semaforo';
-import Street from './Components/Street';
+import React, { useState } from 'react';
 
 function App() {
-  const [startSimulation, setstartSimulation] = useState(false)
+  const [position, setPosition] = useState(0);
 
-  function handleSimulation() {
-    setstartSimulation(!startSimulation)
-  }
-  const alertMessage = (message) => {
-    console.log(message);
+  const handleMoveLeft = () => {
+    setPosition(position => position - 10);
   };
-  return (
-    <>
-    <button  onClick={()=> handleSimulation()}> Start</button>
-    <h1>{startSimulation.toString()}</h1>
-    <div> 
 
-    <BoxDerIzq isMoving_ ={startSimulation} getPosition = {alertMessage}/>
+  const handleMoveRight = () => {
+    setPosition(position => position + 10);
+  };
+
+  return (<>
+  <button onClick={handleMoveLeft}>Mover a la izquierda</button>
+      <button onClick={handleMoveRight}>Mover a la derecha</button>
+      <div style={{ position: 'relative', left: position }}>
       
+      <div style={{ width: 100, height: 100, backgroundColor: 'red' }} />
     </div>
-    <BoxIzqDer isMoving_ ={startSimulation} getPosition = {alertMessage}/>
-    <BoxUpDown isMoving_ ={startSimulation}/>
-    <Semaphor/>
-    <Street/>
-    </>
+  </>
+    
   );
-}
-function semaforoContainer(params) {
-  return(<>
-  
-  </>)
 }
 
 export default App;
