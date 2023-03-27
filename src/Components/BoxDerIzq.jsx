@@ -13,16 +13,16 @@
         config: { duration: 1000 },
     });
     
-    const getPositionX = () => {
-        return x.animation.values[0].lastPosition;
-      }
+    // const getPositionX = () => {
+    //     return x.animation.values[0].lastPosition;
+    //   }
 
       
 
 
     const handleClick = () => {
         setIsMoving(!isMoving);
-       getPosition( getPositionX())
+    //    getPosition( getPositionX())
         console.log(isMoving)
     };
 
