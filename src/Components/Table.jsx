@@ -44,7 +44,9 @@ const getSemaforoClass = (semaforo) => {
     const getSemaforo = (row, col) => {
       if (row === 0 && col === 4) return <div className={getSemaforoClass('sur')}><h2>⬇️</h2></div>;
     //   if (row === 8 && col === 4) return <div className={getSemaforoClass('norte')}></div>;
-      if (row === 4 && col === 0) return <div className={getSemaforoClass('este')}><h2>➡️</h2></div>;
+    if (row === 4 && col === 4) return <div style={{ fontSize: 40 }}>🚦</div>;
+  
+    if (row === 4 && col === 0) return <div className={getSemaforoClass('este')}><h2>➡️</h2></div>;
       if (row === 4 && col === 8) return <div className={getSemaforoClass('oeste')}><h2>⬅️</h2></div>;
       return null;
     };
@@ -67,14 +69,9 @@ const getSemaforoClass = (semaforo) => {
 return (
 <>
 <Matrix/>
-{/* <div className={getSemaforoClass('norte')} ></div>
-<div className={getSemaforoClass('sur')} ></div>
-<div className={getSemaforoClass('este')} ></div>
-<div className={getSemaforoClass('oeste')} ></div> */}
+
 <div>
-{/* <button className={getButtonClass('norte')} onClick={() => handleClick('norte')}>
-{activeSemaforos.includes('norte') ? 'Desactivar' : 'Activar'} semáforo norte
-</button> */}
+<h3> Esto botones manejan los semaforos:</h3>
 <button className={getButtonClass('sur')} onClick={() => handleClick('sur')}>
 {activeSemaforos.includes('sur') ? 'Desactivar' : 'Activar'} semáforo Norte ↓
 </button>
@@ -86,8 +83,8 @@ return (
 </button>
 {/* <button className="button-reset" onClick={handleReset}>Reiniciar</button> */}
 </div>
-<h1>{JSON.stringify(activeSemaforos)}</h1>
-<h1>Conflict: <TextColision activeSemaforos={activeSemaforos.length}/></h1>
+<h1></h1>
+<h1><b>Conflict:</b> <><TextColision activeSemaforos={activeSemaforos.length}/></> <b>| Semaforos activos:</b> <>{JSON.stringify(activeSemaforos)}</></h1>
 </>
 );
 }
