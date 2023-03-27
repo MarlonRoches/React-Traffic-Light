@@ -19,10 +19,7 @@ setActiveDirections(prevState => ({...prevState, [semaforo]: true}));
 }
 }
 
-const handleReset = () => {
-setActiveSemaforos([]);
-setActiveDirections({});
-}
+
 
 const getButtonClass = (semaforo) => {
 if (activeSemaforos.includes(semaforo)) {
