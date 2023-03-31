@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Intersection.css';
+import Modo2 from './Modo2';
 
 const Intersection = () => {
 const [activeSemaforos, setActiveSemaforos] = useState([]);
 const [activeDirections, setActiveDirections] = useState({});
-
+const [toggleMovement, setToggleMovement] = useState(false)
 const handleClick = (semaforo) => {
-if (activeSemaforos.includes(semaforo)) {
-setActiveSemaforos(activeSemaforos.filter(s => s !== semaforo));
-setActiveDirections(prevState => {
-const newState = {...prevState};
-delete newState[semaforo];
-return newState;
-});
-} else {
-setActiveSemaforos([...activeSemaforos, semaforo]);
-setActiveDirections(prevState => ({...prevState, [semaforo]: true}));
+// Obtener el intervalo de tiempo del elemento de entrada de texto con id "timeSeconds"
+const timeInput = document.getElementById("timeSeconds");
+let timeInterval = parseInt(timeInput.value) * 1000; // Convertir a milisegundos
+if (timeInterval.toString()=== "NaN") {
+  timeInterval =0
 }
+// alert(timeInterval)
+
+  // Agregar un retraso de 5 segundos
+  setTimeout(() => {
+    if (activeSemaforos.includes(semaforo)) {
+      setActiveSemaforos(activeSemaforos.filter(s => s !== semaforo));
+      setActiveDirections(prevState => {
+        const newState = {...prevState};
+        delete newState[semaforo];
+        return newState;
+      });
+    } else {
+      setActiveSemaforos([...activeSemaforos, semaforo]);
+      setActiveDirections(prevState => ({...prevState, [semaforo]: true}));
+    }
+  }, timeInterval); // La función se ejecutará después de 5 segundos
 }
+
 
 
 
@@ -68,6 +81,8 @@ const getSemaforoClass = (semaforo) => {
 
 return (
 <>
+<input type={"text"} placeholder="tiempo en segundos" id="timeSeconds"></input> 
+
 <Matrix/>
 
 <div>
@@ -78,6 +93,7 @@ return (
 <button className={getButtonClass('este')} onClick={() => handleClick('este')}>
 {activeSemaforos.includes('este') ? 'Desactivar' : 'Activar'} semáforo Oeste →
 </button>
+
 <button className={getButtonClass('oeste')} onClick={() => handleClick('oeste')}>
 {activeSemaforos.includes('oeste') ? 'Desactivar' : 'Activar'} semáforo Este ←
 </button>
@@ -85,6 +101,12 @@ return (
 </div>
 <h1></h1>
 <h1><b>Conflict:</b> <><TextColision activeSemaforos={activeSemaforos.length}/></> <b>| Semaforos activos:</b> <>{JSON.stringify(activeSemaforos)}</></h1>
+<hr/>
+<hr/>
+<hr/>
+
+<Modo2/>
+
 </>
 );
 }
@@ -96,5 +118,7 @@ function TextColision({activeSemaforos}) {
     
  }   
 }
+
+
   
 export default Intersection;
